@@ -10,7 +10,7 @@
       <% end %>
     </ul>
   <%end %>
-  <div hidden><%= @rest = GooglePlaces::Client.new(["API_KEY"]) %>
+  <div hidden><%= @rest = GooglePlaces::Client.new(ENV["API_KEY"]) %>
   </div>
 
   <% @rest.spots_by_query("restaurant").each do |essaiRestau| %>
