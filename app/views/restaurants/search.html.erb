@@ -1,0 +1,32 @@
+<h2>Chercher un restaurant</h2>
+
+<%= form_for @restaurant, local: true do |form| %>
+
+  <% if @restaurant.errors.any? %>
+    <h2> Une erreur est survenue</h2>
+    <ul>
+      <% @restaurant.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <%end %>
+  <div hidden><%= @rest = GooglePlaces::Client.new('AIzaSyB8h4Z-FyeGkk-KAeHW-2xBIrzDErEIoAA') %>
+  </div>
+
+  <% @rest.spots_by_query("restaurant").each do |essaiRestau| %>
+
+    <div> nom : <%= essaiRestau.name %></div>
+    <div> adresse : <%= essaiRestau.formatted_address %></div>
+    <p>
+      <%=form.submit "Aller y manger" %>
+    </p>
+
+
+    <div hidden>
+      <%=form.text_field :nom, :value => essaiRestau.name %>
+      <%=form.text_field :adresse, :value => essaiRestau.formatted_address %>
+
+    </div>
+
+  <%end %>
+<%end %>

@@ -1,0 +1,25 @@
+<h2>Ajouter le restaurant</h2>
+
+  <%= form_with model: @restaurant, local: true do |form| %>
+    <% if @restaurant.errors.any? %>
+      <h2> Une erreur est survenue</h2>
+      <ul>
+        <% @restaurant.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <%end %>
+    <p>
+      <%=form.label :nom %>
+      <%=form.text_field :nom %>
+    </p>
+
+    <p>
+      <%=form.label :adresse %>
+      <%=form.text_field :adresse %>
+    </p>
+
+    <p>
+      <%=form.submit "Ajouter" %>
+    </p>
+  <% end %>
